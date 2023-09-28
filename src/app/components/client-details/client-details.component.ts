@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
+
 
 import { Client } from '../../models/Client';
 
@@ -24,7 +24,7 @@ export class ClientDetailsComponent implements OnInit {
     private clientService: ClientService,
     private router: Router,
     private route: ActivatedRoute,
-    private flashMessage: FlashMessagesService
+    
   ) { }
 
   ngOnInit(): void {
@@ -46,17 +46,13 @@ export class ClientDetailsComponent implements OnInit {
 
   updateBasicSalary() {
     this.clientService.updateClient(this.client);
-    this.flashMessage.show('Basic salary updated', {
-      cssClass: 'alert-success', timeout: 4000
-    });
+    
   }
 
   onDeleteClick(){
     if(confirm('Are you sure?')) {
       this.clientService.deleteClient(this.client);
-      this.flashMessage.show('Employee removed', {
-        cssClass: 'alert-success', timeout: 4000
-      });
+      
       this.router.navigate(['/']);
     }
   }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+
 
 
 import { environment } from 'src/environments/environment';
@@ -29,7 +29,9 @@ import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
 import { SettingsService } from './services/settings.service';
 import { SearchComponent } from './components/search/search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MaterialModule } from './material/material.module';
 
 
 @NgModule({
@@ -46,16 +48,18 @@ import { SearchComponent } from './components/search/search.component';
     RegisterComponent,
     SettingsComponent,
     NotFoundComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    FlashMessagesModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'clientpanel'),
     AngularFireAnalyticsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MaterialModule
+    
     //provideFirebaseApp(() => initializeApp(environment.firebase,'clientpanel')),
     //provideFirestore(() => getFirestore()),
 
