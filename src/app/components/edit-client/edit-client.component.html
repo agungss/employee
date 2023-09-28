@@ -1,0 +1,235 @@
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/client/{{ id }}" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Back to Client
+    </a>
+  </div>
+  <div class="col-md-6"></div>
+</div>
+
+<div class="card">
+  <div class="card-header">Edit Employee</div>
+  <div class="card-body">
+    <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="firstName"
+          #clientFirstName="ngModel"
+          [ngClass]="{
+            'is-invalid': clientFirstName.errors && clientFirstName.touched
+          }"
+          [(ngModel)]="client!.firstName"
+          minlength="2"
+          required
+        />
+        <div
+          [hidden]="!clientFirstName.errors?.required"
+          class="invalid-feedback"
+        >
+          First name required
+        </div>
+        <div
+          [hidden]="!clientFirstName.errors?.minlength"
+          class="invalid-feedback"
+        >
+          Must be at least 2 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="lastName"
+          #clientLastName="ngModel"
+          [ngClass]="{
+            'is-invalid': clientLastName.errors && clientLastName.touched
+          }"
+          [(ngModel)]="client!.lastName"
+          minlength="2"
+          required
+        />
+        <div
+          [hidden]="!clientLastName.errors?.required"
+          class="invalid-feedback"
+        >
+          Last name required
+        </div>
+        <div
+          [hidden]="!clientLastName.errors?.minlength"
+          class="invalid-feedback"
+        >
+          Must be at least 2 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          name="email"
+          #clientEmail="ngModel"
+          [ngClass]="{
+            'is-invalid': clientEmail.errors && clientEmail.touched
+          }"
+          [(ngModel)]="client!.email"
+          pattern="^[a-z0-9][a-z0-9-_\.]+@([a-z]|[a-z0-9]?[a-z0-9-]+[a-z0-9])\.[a-z0-9]{2,10}(?:\.[a-z]{2,10})?$"
+          required
+        />
+        <div [hidden]="!clientEmail.errors?.required" class="invalid-feedback">
+          Email required
+        </div>
+        <div [hidden]="!clientEmail.errors?.pattern" class="invalid-feedback">
+          Email is not valid
+        </div>
+      </div>
+
+      <!-- birthdate -->
+      <div class="form-group">
+        <label for="birthDate">Birthdate</label>
+        <input
+          type="text"
+          class="form-control"
+          name="birthDate"
+          #clientBirthdate="ngModel"
+          [ngClass]="{
+            'is-invalid': clientBirthdate.errors && clientBirthdate.touched
+          }"
+          [(ngModel)]="client!.birthDate"
+          minlength="8"
+          required
+        />
+        <div
+          [hidden]="!clientBirthdate.errors?.required"
+          class="invalid-feedback"
+        >
+          Birthdate required
+        </div>
+        <div
+          [hidden]="!clientBirthdate.errors?.pattern"
+          class="invalid-feedback"
+        >
+          Must be at least 8 characters (ddmmyyyy)
+        </div>
+      </div>
+      <!-- end of birthdate -->
+
+      <!-- Basic salary -->
+      <div class="form-group">
+        <label for="basicSalary">Basic Salary</label>
+        <input
+          type="text"
+          class="form-control"
+          name="basicSalary"
+          #clientBasicSalary="ngModel"
+          [ngClass]="{
+            'is-invalid': clientBasicSalary.errors && clientBasicSalary.touched
+          }"
+          [(ngModel)]="client!.basicSalary"
+          minlength="5"
+          required
+        />
+        <div
+          [hidden]="!clientBasicSalary.errors?.required"
+          class="invalid-feedback"
+        >
+          Basic salary is required
+        </div>
+        <div
+          [hidden]="!clientBasicSalary.errors?.minlength"
+          class="invalid-feedback"
+        >
+          Must be at least 5 characters
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="form-group">
+        <label for="status">Status</label>
+        <input
+          type="text"
+          class="form-control"
+          name="status"
+          #clientStatus="ngModel"
+          [ngClass]="{
+            'is-invalid': clientStatus.errors && clientStatus.touched
+          }"
+          [(ngModel)]="client!.status"
+          minlength="2"
+          required
+        />
+        <div [hidden]="!clientStatus.errors?.required" class="invalid-feedback">
+          Status is required
+        </div>
+        <div
+          [hidden]="!clientStatus.errors?.minlength"
+          class="invalid-feedback"
+        >
+          Must be at least 2 characters
+        </div>
+      </div>
+      <!-- end of status -->
+
+      <!-- Group -->
+      <div class="form-group">
+        <label for="group">Group</label>
+        <input
+          type="text"
+          class="form-control"
+          name="group"
+          #clientGroup="ngModel"
+          [ngClass]="{
+            'is-invalid': clientGroup.errors && clientGroup.touched
+          }"
+          [(ngModel)]="client!.group"
+          minlength="2"
+          required
+        />
+        <div [hidden]="!clientGroup.errors?.required" class="invalid-feedback">
+          Group is required
+        </div>
+        <div [hidden]="!clientGroup.errors?.minlength" class="invalid-feedback">
+          Must be at least 2 characters
+        </div>
+      </div>
+      <!-- end of group -->
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="group">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          name="description"
+          #clientDescription="ngModel"
+          [ngClass]="{
+            'is-invalid': clientDescription.errors && clientGroup.touched
+          }"
+          [(ngModel)]="client!.description"
+          minlength="8"
+          required
+        />
+        <div
+          [hidden]="!clientDescription.errors?.required"
+          class="invalid-feedback"
+        >
+          Description is required
+        </div>
+        <div
+          [hidden]="!clientDescription.errors?.minlength"
+          class="invalid-feedback"
+        >
+          Must be at least 8 characters (ddmmyyyy)
+        </div>
+      </div>
+      <!-- end of description -->
+
+      <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+    </form>
+  </div>
+</div>
