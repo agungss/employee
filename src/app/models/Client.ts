@@ -3,10 +3,10 @@ export interface Client {
   firstName?: string;
   lastName?: string;
   email?: string;
-  birthDate?: number;
+  birthDate?: any;
   basicSalary?: number;
   status?: string;
   group?: string;
-  description?: number;
+  description?: any;
 
 }

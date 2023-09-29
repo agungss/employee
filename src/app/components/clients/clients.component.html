@@ -9,77 +9,94 @@
   </div>
 </div>
 
-<!-- <app-search></app-search> -->
-<input type="text" placeholder="Search first / last name" #filter />
-<button class="primary" type="button" (click)="filterResults(filter.value)">
-  Search
-</button>
+<!-- Filtering -->
+<mat-form-field>
+  <input
+    (keyup)="applyFilter($event.target.value); searchChange($event)"
+    matInput
+    placeholder="Search"
+    id="searchedText"
+    [value]="loadedText"
+  />
+</mat-form-field>
 
-<!-- <table *ngIf="clients.length > 0; else noClients" class="table table-striped">
-  <thead class="thead-inverse">
-    <tr>
-      <th>Nama</th>
-      <th>Email</th>
-      <th>Basic Salary</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of filteredList">
-      <td>{{ client.firstName }} {{ client.lastName }}</td>
-      <td>{{ client.email }}</td>
-      <td>{{ client.basicSalary | currency : "Rp. " : "symbol" }}</td>
-      <td>
+<!-- Table by Angular Material -->
+<div class="mat-elevation-z8">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+  >
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="firstName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by first name"
+      >
+        First Name
+      </th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.firstName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by last name"
+      >
+        Last Name
+      </th>
+      <td mat-cell *matCellDef="let client">{{ client.lastName }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="email">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by email"
+      >
+        Email
+      </th>
+      <td mat-cell *matCellDef="let client">{{ client.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="basicSalary">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by basic salary"
+      >
+        Basic Salary
+      </th>
+      <td mat-cell *matCellDef="let client">
+        {{ client.basicSalary | currency : "Rp. " : "symbol" }}
         <a routerLink="client/{{ client.id }}" class="btn btn-secondary btn-sm"
           ><i class="fa fa-arrow-circle-o-right"></i> Details</a
         >
       </td>
-    </tr>
-  </tbody>
-</table> -->
+    </ng-container>
 
-<!-- Table by Angular Material -->
-<table
-  *ngIf="clients.length > 0; else noClients"
-  mat-table
-  [dataSource]="dataSource"
-  class="mat-elevation-z8"
->
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef>First Name</th>
-    <td mat-cell *matCellDef="let client">
-      {{ client.firstName }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef>Last Name</th>
-    <td mat-cell *matCellDef="let client">{{ client.lastName }}</td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let client">{{ client.email }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="basicSalary">
-    <th mat-header-cell *matHeaderCellDef>Basic Salary</th>
-    <td mat-cell *matCellDef="let client">
-      {{ client.basicSalary | currency : "Rp. " : "symbol" }}
-      <a routerLink="client/{{ client.id }}" class="btn btn-secondary btn-sm"
-        ><i class="fa fa-arrow-circle-o-right"></i> Details</a
-      >
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
 
 <ng-template #noClients>
   <hr />

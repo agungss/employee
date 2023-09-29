@@ -62,12 +62,13 @@
     <ul class="list-group">
       <li class="list-group-item">Contact Email: {{ client.email }}</li>
       <li class="list-group-item">
-        Birthdate (ddmmyyyy): {{ client.birthDate }}
+        Birthdate:
+        {{ client.birthDate.toDate() | date }}
       </li>
       <li class="list-group-item">status: {{ client.status }}</li>
       <li class="list-group-item">group: {{ client.group }}</li>
       <li class="list-group-item">
-        description (ddmmyyyy): {{ client.description }}
+        description: {{ client.description.toDate() | date }}
       </li>
 
       <!-- <li class="list-group-item">Contact Phone: {{ client.phone }}</li> -->

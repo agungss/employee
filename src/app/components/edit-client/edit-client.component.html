@@ -91,31 +91,27 @@
 
       <!-- birthdate -->
       <div class="form-group">
-        <label for="birthDate">Birthdate</label>
-        <input
-          type="text"
-          class="form-control"
-          name="birthDate"
-          #clientBirthdate="ngModel"
-          [ngClass]="{
-            'is-invalid': clientBirthdate.errors && clientBirthdate.touched
-          }"
-          [(ngModel)]="client!.birthDate"
-          minlength="8"
-          required
-        />
-        <div
-          [hidden]="!clientBirthdate.errors?.required"
-          class="invalid-feedback"
-        >
-          Birthdate required
-        </div>
-        <div
-          [hidden]="!clientBirthdate.errors?.pattern"
-          class="invalid-feedback"
-        >
-          Must be at least 8 characters (ddmmyyyy)
-        </div>
+        <mat-form-field>
+          <input
+            type="text"
+            class="form-control"
+            name="birthDate"
+            #clientBirthDate="ngModel"
+            [ngClass]="{
+              'is-invalid': clientBirthDate.errors && clientBirthDate.touched
+            }"
+            [(ngModel)]="client.birthDate"
+            matInput
+            [matDatepicker]="birthDate"
+            [max]="maxDate"
+            required
+          />
+          <mat-datepicker-toggle
+            [for]="birthDate"
+            matSuffix
+          ></mat-datepicker-toggle>
+          <mat-datepicker #birthDate></mat-datepicker>
+        </mat-form-field>
       </div>
       <!-- end of birthdate -->
 
@@ -177,55 +173,71 @@
 
       <!-- Group -->
       <div class="form-group">
-        <label for="group">Group</label>
-        <input
-          type="text"
-          class="form-control"
-          name="group"
-          #clientGroup="ngModel"
-          [ngClass]="{
-            'is-invalid': clientGroup.errors && clientGroup.touched
-          }"
-          [(ngModel)]="client!.group"
-          minlength="2"
-          required
-        />
-        <div [hidden]="!clientGroup.errors?.required" class="invalid-feedback">
-          Group is required
-        </div>
-        <div [hidden]="!clientGroup.errors?.minlength" class="invalid-feedback">
-          Must be at least 2 characters
-        </div>
+        <mat-form-field>
+          <mat-label>Group</mat-label>
+          <mat-select
+            [(value)]="selectedValue"
+            type="text"
+            class="form-control"
+            name="group"
+            #clientGroup="ngModel"
+            [ngClass]="{
+              'is-invalid': clientGroup.errors && clientGroup.touched
+            }"
+            [(ngModel)]="client.group"
+            minlength="2"
+            required
+          >
+            <mat-option value="it">IT</mat-option>
+            <mat-option value="banking">Banking</mat-option>
+            <mat-option value="digital">Digital</mat-option>
+            <mat-option value="web">Web</mat-option>
+            <mat-option value="mobile">Mobile</mat-option>
+            <mat-option value="finance">Finance</mat-option>
+            <mat-option value="marketing">Marketing</mat-option>
+            <mat-option value="credit">Credit</mat-option>
+            <mat-option value="retail">Retail</mat-option>
+            <mat-option value="other">Other</mat-option>
+          </mat-select>
+          <div
+            [hidden]="!clientGroup.errors?.required"
+            class="invalid-feedback"
+          >
+            Group is required
+          </div>
+          <div
+            [hidden]="!clientGroup.errors?.minlength"
+            class="invalid-feedback"
+          >
+            Must be at least 2 characters
+          </div>
+        </mat-form-field>
       </div>
       <!-- end of group -->
 
       <!-- Description -->
       <div class="form-group">
-        <label for="group">Description</label>
-        <input
-          type="text"
-          class="form-control"
-          name="description"
-          #clientDescription="ngModel"
-          [ngClass]="{
-            'is-invalid': clientDescription.errors && clientGroup.touched
-          }"
-          [(ngModel)]="client!.description"
-          minlength="8"
-          required
-        />
-        <div
-          [hidden]="!clientDescription.errors?.required"
-          class="invalid-feedback"
-        >
-          Description is required
-        </div>
-        <div
-          [hidden]="!clientDescription.errors?.minlength"
-          class="invalid-feedback"
-        >
-          Must be at least 8 characters (ddmmyyyy)
-        </div>
+        <mat-form-field>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            #clientDescription="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                clientDescription.errors && clientDescription.touched
+            }"
+            [(ngModel)]="client.description"
+            matInput
+            [matDatepicker]="description"
+            required
+          />
+          <mat-datepicker-toggle
+            [for]="description"
+            matSuffix
+          ></mat-datepicker-toggle>
+          <mat-datepicker #description></mat-datepicker>
+        </mat-form-field>
       </div>
       <!-- end of description -->
 

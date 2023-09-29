@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { SettingsService } from '../../services/settings.service';
 
 import { Client } from '../../models/Client';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Component({
   selector: 'app-add-client',
@@ -22,11 +24,11 @@ export class AddClientComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    birthDate: 0,
+    birthDate: '',
     basicSalary: 0,
     status: '',
     group: '',
-    description: 0,
+    description: '',
   }
 
   // disableBalanceOnAdd!: boolean;
@@ -34,15 +36,29 @@ export class AddClientComponent implements OnInit {
 
   @ViewChild('clientForm') form: any;
 
+  // tentang date:
+  public date;
+
   constructor(
     private clientService: ClientService,
     private router: Router,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
   ) { }
+
+  // input tanggal maksimal di hari ini:
+  maxDate = new Date();
+
+  // select:
+  selectedValue: string;
+
+  //  date:
+  selectedDate: Date;
 
   ngOnInit(): void {
     // this.disableBalanceOnAdd = this.settingsService.getSettings().disableBalanceOnAdd!;
     this.disableBasicSalaryOnAdd = this.settingsService.getSettings().disableBasicSalaryOnAdd!;
+
+    
   }
 
   onSubmit({value, valid}: NgForm) {
@@ -57,10 +73,12 @@ export class AddClientComponent implements OnInit {
       // Add new client
       this.clientService.newClient(value);
       // Show message
-      
+
       // Redirect to dash
       this.router.navigate(['/']);
     }
+
+  
   }
 
 }

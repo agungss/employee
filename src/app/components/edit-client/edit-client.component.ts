@@ -19,14 +19,19 @@ export class EditClientComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    birthDate: 0,
+    birthDate: '',
     basicSalary: 0,
     status: '',
     group: '',
-    description: 0,
+    description: '',
   }
   disableBalanceOnEdit!: boolean;
 
+  // max date:
+  maxDate = new Date();
+
+  // selected value:
+  selectedValue: string;
 
   constructor(
     private clientService: ClientService,

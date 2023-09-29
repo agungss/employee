@@ -58,12 +58,13 @@ import { MaterialModule } from './material/material.module';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
     
     //provideFirebaseApp(() => initializeApp(environment.firebase,'clientpanel')),
     //provideFirestore(() => getFirestore()),
 
   ],
+  exports: [],
   providers: [ClientService,AuthService,SettingsService],
   bootstrap: [AppComponent]
 })
