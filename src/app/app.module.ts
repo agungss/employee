@@ -28,7 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
 import { SettingsService } from './services/settings.service';
-import { SearchComponent } from './components/search/search.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material/material.module';
@@ -48,7 +48,6 @@ import { MaterialModule } from './material/material.module';
     RegisterComponent,
     SettingsComponent,
     NotFoundComponent,
-    SearchComponent,
   ],
   imports: [
     BrowserModule,
