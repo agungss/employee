@@ -12,11 +12,16 @@
 <!-- Filtering -->
 <mat-form-field>
   <input
-    (keyup)="applyFilter($event.target.value); searchChange($event)"
+    (keyup)="
+      applyFilter($event.target.value);
+      loadedText = $event.target.value;
+      searchChange($event)
+    "
     matInput
     placeholder="Search"
     id="searchedText"
     [value]="loadedText"
+    (change)="applyFilter(loadedText); loadedText = $event.target.value"
   />
 </mat-form-field>
 

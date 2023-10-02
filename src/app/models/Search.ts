@@ -1,4 +1,4 @@
 export interface Search {
-  searchBar: string;
+  searchBar?: string;
 
 }

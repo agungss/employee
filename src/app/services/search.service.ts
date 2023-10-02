@@ -12,7 +12,7 @@ export class SearchService {
   constructor() {
     if(localStorage.getItem('search') != null) {
       // read, need parse
-      this.search = JSON.parse(localStorage.getItem('search')!);
+      this.search = JSON.parse(localStorage.getItem('search'));
     }
   }
 
@@ -21,6 +21,12 @@ export class SearchService {
   }
 
   changeSearch(search: Search) {
+    localStorage.setItem('search', JSON.stringify(search));
+    console.log(search);
+    
+  }
+
+  changeSearchMod(search: Search) {
     // save, need stringify
     localStorage.setItem('search', JSON.stringify(search));
     

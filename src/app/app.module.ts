@@ -28,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
 import { SettingsService } from './services/settings.service';
+import { SearchService } from './services/search.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -64,7 +65,7 @@ import { MaterialModule } from './material/material.module';
 
   ],
   exports: [],
-  providers: [ClientService,AuthService,SettingsService],
+  providers: [ClientService,AuthService,SettingsService,SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

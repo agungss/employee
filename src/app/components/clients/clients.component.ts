@@ -39,9 +39,20 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
   dataSource = new MatTableDataSource(this.clients);
 
+
+  // ambil searchBar:
+  searchBar: string;
+
   // filtering:
   applyFilter(filterValue: string) {
+    // filterValue = this.searchService.getSearch().searchBar;
+    filterValue = this.loadedText;
+
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    // console.log('searchBar:'+this.searchBar);
+    console.log('loadedText:'+this.loadedText);
+    
+    
   }
   
 
@@ -53,6 +64,12 @@ export class ClientsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    console.log('ngAfterViewInit');
+
+    // this.searchBar = this.searchService.getSearch().searchBar;
+
+    
+
   }
   /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort) {
@@ -68,11 +85,17 @@ export class ClientsComponent implements OnInit, AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
 
-    // simpan search state:
+
     this.searchService.changeSearch(this.search);
+    console.log('searchBar in announceSort' + this.searchBar);
+    
+
   }
 
   ngOnInit(){
+    
+
+
     this.clientService.getClients().subscribe(clients => {
       this.clients = clients;
 
@@ -91,13 +114,25 @@ export class ClientsComponent implements OnInit, AfterViewInit {
       //format date:
       // Intl.DateTimeFormat('en-US').format(d);
       this.reload();
+
+      this.applyFilter(this.loadedText);
+
+      // ini reflect pencarian searchBar:
+      // this.applyFilter(this.searchService.getSearch().searchBar);
+
       
     });
 
     // implement filter list:
     this.filteredList = this.clients;
 
-    
+    // this.searchBar = this.searchService.getSearch().searchBar;
+
+
+
+
+    console.log('searchBar in ngOnInit' + this.searchBar);
+
   }
 
   getTotalBasicSalary() {
@@ -107,12 +142,19 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
   }
 
+  onSearchWord(search) {
+    this.searchService.changeSearch(search);
+  }
+
 
   searchChange(searchedText) {
     // save, need stringify
     // localStorage.setItem('search', JSON.stringify(this.search));
     searchedText = (<HTMLInputElement>document.getElementById('searchedText')).value;
     localStorage.setItem("text", searchedText);
+    console.log('searchedText'+searchedText);
+    console.log('loadedText'+this.loadedText);
+    
   }
 
   reload() {
