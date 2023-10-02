@@ -152,8 +152,8 @@ export class ClientsComponent implements OnInit, AfterViewInit {
     // localStorage.setItem('search', JSON.stringify(this.search));
     searchedText = (<HTMLInputElement>document.getElementById('searchedText')).value;
     localStorage.setItem("text", searchedText);
-    console.log('searchedText'+searchedText);
-    console.log('loadedText'+this.loadedText);
+    // console.log('searchedText'+searchedText);
+    // console.log('loadedText'+this.loadedText);
     
   }
 
