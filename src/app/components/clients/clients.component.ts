@@ -45,8 +45,15 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
   // filtering:
   applyFilter(filterValue: string) {
-    // filterValue = this.searchService.getSearch().searchBar;
-    filterValue = this.loadedText;
+
+      // filterValue = this.searchService.getSearch().searchBar;
+    // if the 'text' value doesn't exist in localstorage, then make one
+    if (localStorage.getItem('text') === null) {
+      filterValue = this.searchService.getSearch().searchBar;
+    } else {
+      filterValue = this.loadedText;
+    }
+    
 
     this.dataSource.filter = filterValue.trim().toLowerCase();
     // console.log('searchBar:'+this.searchBar);
@@ -94,7 +101,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(){
     
-
+    
 
     this.clientService.getClients().subscribe(clients => {
       this.clients = clients;
