@@ -30,6 +30,11 @@ export class EditClientComponent implements OnInit {
   // max date:
   maxDate = new Date();
 
+  // to hold current saved date:
+  savedbirthDate = new Date();
+  savedDescription = new Date();
+  
+
   // selected value:
   selectedValue: string;
 
@@ -41,12 +46,28 @@ export class EditClientComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.disableBalanceOnEdit = this.settingsService.getSettings().disableBalanceOnEdit!;
     // Get id from url
     this.id = this.route.snapshot.params['id'];
     // Get client
-    this.clientService.getClient(this.id).subscribe(client  =>
-      this.client = client);
+    this.clientService.getClient(this.id).subscribe(client  => 
+      {
+        this.client = client
+        
+        // this.outputDate = new Date(this.client.birthDate);
+        console.log('this.client.birthDate value: ' + this.client.birthDate);
+        console.log('this.client.birthDate type: ' + typeof(this.client.birthDate.toDate()));
+        
+        // hold the saved date:
+        this.savedbirthDate = this.client.birthDate.toDate();
+        this.savedDescription = this.client.description.toDate();
+        
+      }
+      );
+      
+
+    
   }
 
   onSubmit({value, valid}: NgForm) {
@@ -63,4 +84,17 @@ export class EditClientComponent implements OnInit {
       this.router.navigate(['/client/'+this.id]);
     }
   }
+
+  unixTime(unixtime) {
+
+    var u = new Date(unixtime*1000);
+
+      return u.getUTCFullYear() +
+        '-' + ('0' + u.getUTCMonth()).slice(-2) +
+        '-' + ('0' + u.getUTCDate()).slice(-2) + 
+        ' ' + ('0' + u.getUTCHours()).slice(-2) +
+        ':' + ('0' + u.getUTCMinutes()).slice(-2) +
+        ':' + ('0' + u.getUTCSeconds()).slice(-2) +
+        '.' + (u.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) 
+    };
 }

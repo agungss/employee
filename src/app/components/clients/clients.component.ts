@@ -57,7 +57,7 @@ export class ClientsComponent implements OnInit, AfterViewInit {
 
     this.dataSource.filter = filterValue.trim().toLowerCase();
     // console.log('searchBar:'+this.searchBar);
-    console.log('loadedText:'+this.loadedText);
+    // console.log('loadedText:'+this.loadedText);
     
     
   }

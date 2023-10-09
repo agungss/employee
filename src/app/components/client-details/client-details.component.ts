@@ -28,6 +28,7 @@ export class ClientDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     // Get id from url
     this.id = this.route.snapshot.params['id'];
     // Get client
@@ -41,7 +42,9 @@ export class ClientDetailsComponent implements OnInit {
       this.client = client;
 
 
+
     })
+    
   }
 
   updateBasicSalary() {
