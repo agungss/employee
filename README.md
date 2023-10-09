@@ -1,5 +1,7 @@
 # Employee
 
+This project is a complete Employee Management System created in angular. It contains Register/Login page, Employee List, Employee Detail, Add an Employee, Edit an Employee, Deleting an Employee. It also contains filtering, sorting, and paginating. It also applies some state of searching to localStorage as well as saving data to the cloud (firestore/firebase). So this project is a real world fullstack app.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
 
 ## Development server
